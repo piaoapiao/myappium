@@ -55,7 +55,7 @@ class SimpleIOSTests(unittest.TestCase):
         launchImage3 = self.driver.find_element_by_accessibility_id("launchImage3")
         launchImage3.click()
 
-        sleep(7)
+        sleep(6)
 
         #tabmy = self.driver.find_element_by_ios_class_chain("//XCUIElementTypeApplication[@name=\"麦子金服财富\"]/XCUIElementTypeWindow[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeTabBar/XCUIElementTypeButton[4]")
         #tabmy.click()
