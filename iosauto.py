@@ -66,7 +66,29 @@ class SimpleIOSTests(unittest.TestCase):
 
         mybutton.click()
 
+        
+
+
+        #loginUser = tabbar.find_elements_by_class_name("XCUIElementTypeTextField")[0]
+
+        #userNameField = self.driver.find_element_by_ios_predicate("label =='请输入手机号/用户名'")
+
+
+        print len(self.driver.find_elements_by_class_name("XCUIElementTypeTextField"))
+
+        phoneNum_field = self.driver.find_elements_by_class_name("XCUIElementTypeTextField")[0]
+        phoneNum_field.send_keys("13262591951")
+
+        #sleep(10)
+
+        password_field = self.driver.find_elements_by_class_name("XCUIElementTypeSecureTextField")[0]
+        password_field.send_keys("it789123")
+
+        login_button = self.driver.find_elements_by_class_name("XCUIElementTypeButton")[0]
+        login_button.click()
+
         sleep(10)
+
 
         #TouchAction(self.driver).tap([(188, 340)]).perform()
 
