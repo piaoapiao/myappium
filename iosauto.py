@@ -1,4 +1,6 @@
+# -*- coding:UTF-8 -*-
 #!/usr/bin/env python
+
 """
 Simple iOS tests, showing accessing elements and getting/setting text from them.
 """
@@ -29,21 +31,44 @@ class SimpleIOSTests(unittest.TestCase):
     # def test_print(self):
     #     print "ggg"
 
-    def test_scorll(self):
-    	print "texxxxx"        
+    def test_gohome(self):
+        print "texxxxx"        
         #els = self.driver.findElementByIosNsPredicate("value =='Allow'")
         allowbtn = self.driver.find_element_by_ios_predicate("label =='Allow'")
         allowbtn.click()
 
         #sleep(1)
 
-        self.driver.implicitly_wait(1)
+        #self.driver.implicitly_wait(1)
 
         for i in range(2):
-            self.driver.swipe(start_x=333, start_y=497, end_x=-150, end_y=497, duration=50)
+            self.driver.swipe(start_x=333, start_y=497, end_x=-300, end_y=497, duration=1)
 
-            self.driver.implicitly_wait(150)
+            #self.driver.implicitly_wait(150)
 
+        #sleep(10)
+
+
+        #TouchAction(self.driver).tap([(188, 340)]).perform()
+
+        # 选择launchImage3  ，通过Appnium 选择工具选择
+        launchImage3 = self.driver.find_element_by_accessibility_id("launchImage3")
+        launchImage3.click()
+
+        sleep(1)
+
+        #tabmy = self.driver.find_element_by_ios_class_chain("//XCUIElementTypeApplication[@name=\"麦子金服财富\"]/XCUIElementTypeWindow[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeTabBar/XCUIElementTypeButton[4]")
+        #tabmy.click()
+
+        tabbar = self.driver.find_elements_by_class_name('XCUIElementTypeTabBar')[0]        
+
+        mybutton = tabbar.find_elements_by_class_name("XCUIElementTypeButton")[3]
+
+        mybutton.click()
+
+        sleep(10)
+
+        #TouchAction(self.driver).tap([(188, 340)]).perform()
 
         #self.driver.flick(300, 300,50 , 500)
 
@@ -77,9 +102,9 @@ class SimpleIOSTests(unittest.TestCase):
         
         #image1.swipe()        
         #metabbar.click()
-    	# els = self.driver.findElementByIosNsPredicate("value =='Allow'")
+        # els = self.driver.findElementByIosNsPredicate("value =='Allow'")
 
-    	# els.click()
+        # els.click()
 
         # els = self.driver.find_elements_by_class_name('XCUIElementTypeButton')
         # els[5].click()
