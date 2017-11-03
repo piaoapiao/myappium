@@ -15,7 +15,7 @@ class SimpleIOSTests(unittest.TestCase):
 
     def setUp(self):
         # set up appium        
-        app = os.path.abspath('/Users/guodong/Desktop/web/YHB_Prj.app')
+        app = os.path.abspath('./YHB_Prj.app')
         self.driver = webdriver.Remote(
             command_executor='http://127.0.0.1:4723/wd/hub',
             desired_capabilities={
@@ -55,19 +55,21 @@ class SimpleIOSTests(unittest.TestCase):
         launchImage3 = self.driver.find_element_by_accessibility_id("launchImage3")
         launchImage3.click()
 
-        sleep(1)
+        sleep(7)
 
         #tabmy = self.driver.find_element_by_ios_class_chain("//XCUIElementTypeApplication[@name=\"麦子金服财富\"]/XCUIElementTypeWindow[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeTabBar/XCUIElementTypeButton[4]")
         #tabmy.click()
+
+        close_btn = self.driver.find_elements_by_class_name("XCUIElementTypeButton")[0]
+        close_btn.click()
+
+
 
         tabbar = self.driver.find_elements_by_class_name('XCUIElementTypeTabBar')[0]        
 
         mybutton = tabbar.find_elements_by_class_name("XCUIElementTypeButton")[3]
 
         mybutton.click()
-
-        
-
 
         #loginUser = tabbar.find_elements_by_class_name("XCUIElementTypeTextField")[0]
 
@@ -84,10 +86,33 @@ class SimpleIOSTests(unittest.TestCase):
         password_field = self.driver.find_elements_by_class_name("XCUIElementTypeSecureTextField")[0]
         password_field.send_keys("it789123")
 
-        login_button = self.driver.find_elements_by_class_name("XCUIElementTypeButton")[0]
+        login_button = self.driver.find_elements_by_class_name("XCUIElementTypeButton")[2]
         login_button.click()
 
-        sleep(10)
+        #skipbtn = self.driver.find_elements_by_class_name('//XCUIElementTypeButton[@name="跳过"]')
+
+        sleep(2)
+
+        #skipbtn = self.driver.find_element_by_accessibility_id("跳过")
+        skipbtn = self.driver.find_element_by_ios_predicate("label =='跳过'")
+        skipbtn.click()
+
+        self.assertTrue(skipbtn)
+
+        # if(skipbtn)
+        # {
+        #     print "have skipbt"
+        # }
+
+        #self.assertIsNotNone(skipbtn)
+        # if(skipbtn)
+        # {
+        #     self.assertTrue(scroll_after)
+        # }
+
+        sleep(2)
+
+
 
 
         #TouchAction(self.driver).tap([(188, 340)]).perform()
