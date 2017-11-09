@@ -15,9 +15,10 @@ class SimpleIOSTests(unittest.TestCase):
 
     def setUp(self):
         # set up appium        
+        #app = os.path.abspath('./HHH.app')
         app = os.path.abspath('./YHB_Prj.app')
         self.driver = webdriver.Remote(
-            command_executor='http://127.0.0.1:4723/wd/hub',
+            command_executor='http://localhost:4723/wd/hub',
             desired_capabilities={
                 'app': app,
                 'platformName': 'iOS',
@@ -26,12 +27,81 @@ class SimpleIOSTests(unittest.TestCase):
             })
 
     def tearDown(self):
+        #退出app
         self.driver.quit()
 
-    # def test_print(self):
-    #     print "ggg"
+    def atest_control(self):
+        print "ggg"
+        #allowbtn = self.driver.find_element_by_ios_predicate("label =='Allow'")
+        #allowbtn.click()
+        # btn = self.driver.find_element_by_ios_predicate("label =='Button'")
+        # self.assertIsNotNone(btn)
+        # label = self.driver.find_element_by_ios_predicate("label =='Label'")
+        # self.assertIsNotNone(label)
 
-    def test_gohome(self):
+        #image = self.driver.find_element_by_ios_predicate("value =='tu.jpg'")
+        #self.assertIsNotNone(image)
+
+        # textfiled = self.driver.find_element_by_ios_predicate("label =='textfid'")
+        # self.assertIsNotNone(textfiled)
+        # textfiled.send_keys("textFilll")
+
+        #text_view = self.driver.find_element_by_ios_predicate("label =='textarea'")
+        #self.assertIsNotNone(text_view)
+
+        # 比较落伍的方式
+        self.driver.find_element_by_xpath('//XCUIElementTypeButton[@name="buttonlabel"]').click()
+
+
+        # 键盘消失
+        #self.driver.hide_keyboard()
+        self.driver.hide_keyboard()
+        #self.driver.hide_keyboard(strategy='swipeOutside')
+
+        btn2 = self.driver.find_element_by_accessibility_id('buttonlabel')
+        self.assertIsNotNone(btn2)
+        label2 = self.driver.find_element_by_accessibility_id("accty")
+        self.assertIsNotNone(label2)
+
+
+        button = self.driver.find_elements_by_class_name('XCUIElementTypeButton')[0]
+        self.assertIsNotNone(button)
+
+        # UILable
+        label = self.driver.find_elements_by_class_name('XCUIElementTypeStaticText')[0]
+        self.assertIsNotNone(label)
+        #label.send_keys("label ok")
+
+        image = self.driver.find_elements_by_class_name('XCUIElementTypeImage')[0]    
+        self.assertIsNotNone(image)
+
+        text_view = self.driver.find_elements_by_class_name('XCUIElementTypeTextView')[0]
+        text_view.send_keys("text view ok")
+
+        text_field = self.driver.find_elements_by_class_name('XCUIElementTypeTextField')[0]
+        # get default/empty text
+        default_val = text_field.get_attribute("value")
+        print "aaaa"
+        print default_val
+        print "tttt"
+        text_field.send_keys("text field ok")
+
+
+
+        switch = self.driver.find_elements_by_class_name('XCUIElementTypeSwitch')[0]
+        self.assertIsNotNone(switch)
+        
+        slider = self.driver.find_elements_by_class_name('XCUIElementTypeSlider')[0]
+        self.assertIsNotNone(slider)
+
+        #text_view2 = self.driver.find_element_by_accessibility_id('textarea')
+        #self.assertIsNotNone(text_view2)
+
+        sleep(1)
+
+
+
+    def goHome(self):
         print "texxxxx"        
         #els = self.driver.findElementByIosNsPredicate("value =='Allow'")
         allowbtn = self.driver.find_element_by_ios_predicate("label =='Allow'")
@@ -56,6 +126,12 @@ class SimpleIOSTests(unittest.TestCase):
         launchImage3.click()
 
         sleep(6)
+
+
+    def atest_login(self):
+        self.goHome();
+
+        #self.driver.implicitly_wait(6)
 
         #tabmy = self.driver.find_element_by_ios_class_chain("//XCUIElementTypeApplication[@name=\"麦子金服财富\"]/XCUIElementTypeWindow[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeTabBar/XCUIElementTypeButton[4]")
         #tabmy.click()
@@ -91,28 +167,20 @@ class SimpleIOSTests(unittest.TestCase):
 
         #skipbtn = self.driver.find_elements_by_class_name('//XCUIElementTypeButton[@name="跳过"]')
 
-        sleep(2)
+        sleep(1)
 
-        #skipbtn = self.driver.find_element_by_accessibility_id("跳过")
-        skipbtn = self.driver.find_element_by_ios_predicate("label =='跳过'")
+        skipbtn = self.driver.find_element_by_accessibility_id("跳过")
+        #skipbtn = self.driver.find_element_by_ios_predicate("label =='跳过'")
         skipbtn.click()
 
         self.assertTrue(skipbtn)
 
-        # if(skipbtn)
-        # {
-        #     print "have skipbt"
-        # }
-
         #self.assertIsNotNone(skipbtn)
-        # if(skipbtn)
-        # {
-        #     self.assertTrue(scroll_after)
-        # }
 
-        sleep(2)
+        #切换到后台 3 s
+        #self.driver.background_app(3)  
 
-
+        sleep(5)
 
 
         #TouchAction(self.driver).tap([(188, 340)]).perform()
@@ -169,6 +237,14 @@ class SimpleIOSTests(unittest.TestCase):
 
         # location = el.location
         # self.driver.swipe(start_x=location['x'], start_y=location['y'], end_x=0.5, end_y=location['y'], duration=800)
+
+    def test_webview(self):
+        self.goHome();
+        TouchAction(self.driver).tap(x=275, y=283).perform()  
+        #TouchAction(self.driver).tap(275, 283).perform()
+        #TouchAction(self.driver).tap([(275, 283)]).perform()
+        #TouchAction(self.driver).press(x=275, y=283).move_to(x=280, y=290).release().perform()
+        sleep(100)
 
 
 if __name__ == '__main__':
